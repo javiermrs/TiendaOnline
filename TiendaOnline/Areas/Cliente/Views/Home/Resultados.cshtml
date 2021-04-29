@@ -1,0 +1,51 @@
+﻿@using TiendaOnline.Models;
+
+
+@{ ViewData["Title"] = "Inicio"; }
+
+
+<br />
+<br />
+
+
+<div class="row justify-content-center">
+    <div class="col-xl-7 col-lg-8 col-md-10">
+        <div class="section-tittle mb-70 text-center">
+            <h2>Todos los productos</h2>
+        </div>
+    </div>
+</div>
+
+<!--? Popular Items Start -->
+<div class="popular-items">
+    <div class="container">
+        <!-- Section tittle -->
+        <div class="row">
+
+            @foreach (var producto in Model)
+            {
+<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+    <div class="single-popular-items mb-50 text-center">
+        <div class="popular-img">
+            @*<img src="~/TimeZone/assets/img/gallery/popular1.png" alt="">*@
+
+            <img src="~/@producto.Imagen" alt="">
+            <div class="img-cap">
+                <span class="p-2"><a asp-action="Detail" asp-controller="Home" asp-route-id="@producto.ID" class="button boxed-btn" style="border:none;">Detalles</a></span>
+            </div>
+            <div class="favorit-items">
+                <span class="flaticon-heart"></span>
+            </div>
+        </div>
+        <div class="popular-caption">
+            <h3><a href="product_details.html">@producto.Nombre</a></h3>
+            <span> $@producto.Precio</span>
+        </div>
+    </div>
+</div>}
+        </div>
+
+        <!-- Button -->
+
+    </div>
+</div>

@@ -1,0 +1,147 @@
+﻿@using TiendaOnline.Models
+@model List<Carrito>
+@{
+    ViewData["Title"] = "Carrito";
+}
+
+<br />
+
+@*<br />
+<div class="row">
+    <table class="table table-bordered text-center">
+        <thead>
+            <tr>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Categoria del Producto</th>
+                <th>Detalles</th>
+                <th>Accion</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var k in Model)
+            {
+                <tr>
+                    <td>
+                        <img src="~/@k.Imagen" width="200px" height="150px" />
+                    </td>
+                    <td>@k.Nombre</td>
+                    <td>@k.Precio</td>
+                    <td>@k.CategoriaProductos.nombreCategoria</td>
+                    <td>@k.Detalles</td>
+                    <td>
+                        <a asp-area="Cliente" asp-action="Remove" asp-controller="Home" asp-route-id="@k.ID" class="btn btn-danger">
+                            Eliminar
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="row">
+
+    <div class="col-6">
+        <a asp-action="Index" asp-controller="Home" class="btn btn-success">Volver al Inicio</a>
+    </div>
+    <div class="col-6 text-right">
+        <h3>Precio Total</h3>
+        <h3>Total Facturado : $@Model.Sum(c => c.Precio)</h3>
+        <a asp-area="Cliente" asp-action="Checkout" asp-controller="Orden" class="btn btn-info">Verificar</a>
+    </div>
+
+</div>*@
+
+<section class="cart_area ">
+    <div class="container">
+        <div class="cart_inner">
+            <div class="table-responsive">
+                <h1>Carrito</h1>
+                <br />
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="font-size:18px; color:black;">Producto</th>
+                            <th scope="col" style="font-size:18px; color:black;">Nombre</th>
+                            <th scope="col" style="font-size:18px; color:black;">Precio</th>
+                            <th scope="col" style="font-size:18px; color:black;">Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var k in Model)
+                        {
+
+                            <tr>
+                                <td>
+                                    <div class="media">
+                                        <div class="d-flex">
+                                            <img src="~/@k.Producto.Imagen" />
+                                        </div>
+                                        @*<div class="media-body">
+                                    <p>@k.Producto.Nombre</p>
+                                </div>*@
+                                    </div>
+                                </td>
+                                <td>
+                                    @k.Producto.Nombre
+                                </td>
+                                @*<td>
+                            <h5>@k.CategoriaProductos.nombreCategoria</h5>
+                        </td>*@
+                                <td>
+                                    <h5>@k.Producto.Precio</h5>
+                                </td>
+                                <td>
+                                    <a class="btn_3 p-2" asp-area="Cliente" asp-action="Remove" asp-controller="Home" asp-route-id="@k.Id">
+                                        Eliminar
+                                    </a>
+                                </td>
+                                @*<td>
+                            <h5 class="text-center">
+                                <span class="fas fa-trash-alt button button-contactForm"><a asp-area="Cliente" asp-action="Remove" asp-controller="Home" asp-route-id="@k.Id"></a></span>
+                            </h5>
+                        </td>*@
+                            </tr>
+
+
+                        }
+
+                    </tbody>
+                </table>
+                <br />
+                <div class="text-right">
+                    <h5 class="" style="font-size:20px; color:black;">Total facturado:</h5>
+                    <h5 style="font-size:20px; color:black;">$@Model.Sum(c => c.Producto.Precio)</h5>
+                </div>
+                <br />
+                <div class="">
+                    <a class="btn_3  text-center col-sm-2 col-md-3" asp-action="Index" asp-controller="Home">Seguir comprando</a>
+
+                    <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+                        <input type="hidden" name="cmd" value="_xclick">
+                        <input type="hidden" name="business" value="verlyn2800@gmail.com">
+                        <input type="hidden" name="item_name" value="Premium Subscription">
+                        <input type="hidden" name="currency_code" value="USD">
+                        <input type="hidden" name="amount" value="@Model.Sum(c => c.Producto.Precio)">
+
+                        <input type="submit" value="Realizar Pago" class="btn_1 checkout_btn_1 float-right col-sm-2 col-md-3 text-center mt-md-0 mt-sm-3"
+                               src="http://www.paypal.com/es_XC/i/btn/x-click-but01.gif"
+                               name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
+
+                        <input type="hidden" name="return" value="https://localhost:44387/Cliente/Orden/Checkout/pagado.php">
+                        <input type="hidden" name="cancel_return" value="https://localhost:44387/Cliente/Home/Carrito/cancelado.php">
+
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</section>
+<!--================End Cart Area =================-->
+
+

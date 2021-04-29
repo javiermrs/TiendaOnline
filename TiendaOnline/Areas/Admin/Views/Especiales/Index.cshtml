@@ -1,0 +1,80 @@
+﻿@using TiendaOnline.Models;
+@model IEnumerable<Especiales>
+@{
+    ViewData["Title"] = "Especiales";
+}
+<br />
+<br />
+
+
+<div class="row">
+    <div class="col-6">
+        <h2 class="text-info">Especiales</h2>
+    </div>
+    <div class="col-6 text-right">
+        <a asp-action="Create" class="btn btn-info">Nuevo Especial</a>
+    </div>
+</div>
+
+<br />
+
+<div>
+    <table class="table table-striped border">
+
+        <tr class="table-info">
+            <th>
+                @Html.DisplayNameFor(c => c.Nombre)
+            </th>
+            <th>
+
+            </th>
+            <th class="text-center">
+                Acción
+            </th>
+        </tr>
+
+        @foreach (var k in Model)
+        {
+            <tr>
+                <td>
+                    @k.Nombre
+                </td>
+                <td>
+                    <partial name="_ButtonEspecialPartial" model="@k.ID" />
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+
+@section scripts{
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            //Guardar
+            var guardar = '@TempData["guardar"]'
+            if (guardar != '') {
+                alertify.success(guardar);
+            }
+
+            //Editar
+
+            var editar = '@TempData["editar"]'
+            if (editar != '') {
+                alertify.success(editar);
+            }
+
+            //Eliminar
+            var eliminar = '@TempData["eliminar"]'
+            if (eliminar != '') {
+                alertify.error(eliminar);
+            }
+
+
+        })
+    </script>
+
+}

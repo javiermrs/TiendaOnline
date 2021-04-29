@@ -1,0 +1,102 @@
+﻿@using TiendaOnline.Models;
+@model IEnumerable<Orden>
+@{
+    ViewData["Title"] = "Index";
+}
+<br />
+<br />
+<div class="container">
+
+
+    <div class="row">
+        <div class="col-6">
+            <h2 class="text-info">Lista de Ordenes</h2>
+        </div>
+        <div class="col-6 text-right">
+            @*<a asp-action="Create" class="btn btn-info">Nueva Categoria</a>*@
+        </div>
+    </div>
+
+    <br />
+
+    <div>
+        <table class="table table-striped border text-center">
+
+            <tr class="table-info">
+                <th>
+                    @Html.DisplayNameFor(c => c.numeroOrden)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(c => c.Nombre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(c => c.Correo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(c => c.Estado)
+                </th>
+                <th>
+
+                </th>
+                <th class="text-center">
+                    Acción
+                </th>
+            </tr>
+
+            @foreach (var k in Model)
+            {
+        <tr>
+            <td>
+                @k.numeroOrden
+            </td>
+            <td>
+                @k.Nombre
+            </td>
+            <td>
+                @k.Correo
+            </td>
+            <td>
+                @k.Estado
+            </td>
+            <td>
+            </td>
+            <td>
+                <partial name="_ButtonEditOrdenPartial" model="@k.ID" />
+            </td>
+        </tr>
+            }
+
+        </table>
+    </div>
+</div>
+
+
+@section scripts{
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            //Guardar
+            var guardar = '@TempData["guardar"]'
+            if (guardar != '') {
+                alertify.success(guardar);
+            }
+
+            //Editar
+
+            var editar = '@TempData["editar"]'
+            if (editar != '') {
+                alertify.success(editar);
+            }
+
+            //Eliminar
+            var eliminar = '@TempData["eliminar"]'
+            if (eliminar != '') {
+                alertify.error(eliminar);
+            }
+
+
+        })
+    </script>
+
+}

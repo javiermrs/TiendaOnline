@@ -1,0 +1,64 @@
+﻿@model TiendaOnline.Models.Slider
+@{
+    ViewData["Title"] = "Agregar Foto";
+}
+
+<br />
+<div class="container">
+    <h2 class="text-info"> Agregar Nueva Foto</h2>
+
+    <form asp-action="Create" method="post" enctype="multipart/form-data">
+        <div class="p-4 rounded border">
+            <div asp-validation-summary="ModelOnly" class="text-danger">
+
+            </div>
+
+
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="image">Foto: </label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="image" class="form-control" type="file" />
+                </div>
+                <span asp-validation-for="image" class="text-danger"></span>
+            </div>
+
+
+
+
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="Nombre"></label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="Nombre" class="form-control" />
+                </div>
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+
+
+
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="Descripcion"></label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="Descripcion" class="form-control" />
+                </div>
+                <span asp-validation-for="Descripcion" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <input type="submit" class="btn btn-success" value="Guardar" />
+                <a asp-action="Index" class="btn btn-primary">Volver a la lista</a>
+            </div>
+        </div>
+    </form>
+
+</div>
+    @section Scripts{
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }

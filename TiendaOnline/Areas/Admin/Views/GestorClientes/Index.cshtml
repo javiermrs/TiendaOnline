@@ -1,0 +1,40 @@
+﻿@model IEnumerable<TiendaOnline.Models.ApplicationUser>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<br />
+<br />
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <h2 class="text-info">Lista de Clientes</h2>
+        </div>
+
+    </div>
+    <br />
+
+    <div>
+        <table class="table table-striped border text-center">
+
+            <tr class="table-info">
+                <th>Correo del Usuario</th>
+                <th>Acción</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.UserName</td>
+                    <td style="width: 150px">
+                        <a asp-action="VisualizarCompras" class="btn_3 p-2" asp-route-id="@item.Id">
+                            Ver Compras
+                        </a>
+                    </td>
+
+
+                </tr>
+            }
+        </table>
+    </div>
+
+</div>

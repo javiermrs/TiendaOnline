@@ -1,0 +1,41 @@
+﻿@model TiendaOnline.Models.CategoriaProductos
+@{
+    ViewData["Title"] = "Detalles de Categoria";
+}
+
+<br />
+<br />
+
+<div class="container">
+
+
+    <h2 class="text-info"> Detalles Categoria de Producto</h2>
+
+    <form asp-action="Details" method="post">
+        <div class="p-4 rounded border">
+            <div asp-validation-summary="ModelOnly" class="text-danger">
+
+            </div>
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="nombreCategoria"></label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="nombreCategoria" readonly="readonly" class="form-control" />
+                </div>
+                <span asp-validation-for="nombreCategoria" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 form-group">
+                <button asp-action="Index" class="btn_3">
+                    Cancelar
+                </button>
+                <a asp-action="Edit" asp-route-id="@Model.ID" class="btn_3">Editar</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

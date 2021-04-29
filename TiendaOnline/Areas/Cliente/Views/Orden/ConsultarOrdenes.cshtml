@@ -1,0 +1,44 @@
+﻿@model IEnumerable<TiendaOnline.Models.Orden>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<br />
+<br />
+<div class="container">
+
+    <div class="row">
+        <div class="col-6">
+            <h2 class="text-dark text-center">Mis Ordenes</h2>
+        </div>
+    </div>
+    <br />
+    <div>
+        <table class="table table-striped border text-center ">
+
+            <tr class="table-info text-center">
+                <th scope="col">Numero de Orden</th>
+                <th>Nombre del Cliente</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+
+
+            </tr>
+            @foreach (var k in Model)
+            {
+                <tr class="">
+                    <td class="visit">@k.numeroOrden</td>
+                    <td>@k.Nombre</td>
+                    <td>@k.Fecha</td>
+                    <td>@k.Estado</td>
+
+
+                </tr>
+            }
+        </table>
+
+    </div>
+
+    <a class="btn_3 p-2 pl-4 pr-4" asp-action="Index" asp-controller="Home">Volver</a>
+
+</div>

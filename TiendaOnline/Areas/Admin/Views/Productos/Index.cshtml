@@ -1,0 +1,183 @@
+﻿@using TiendaOnline.Models;
+@model IEnumerable<Productos>
+@{
+    ViewData["Title"] = "Index";
+}
+<br />
+
+<br />
+<div class="container">
+
+
+    <div class="row">
+        <div class="col-6">
+            <h2 class="text-info">Lista de Productos</h2>
+        </div>
+        <div class="col-6 text-right">
+            <a asp-action="Create" class="button button-contactForm boxed-btn p-3">Agregar Producto</a>
+        </div>
+        <br />
+    </div>
+    <br />
+    <form method="post">
+        <div class="input-group">
+            <div class="col-2">
+                <input type="number" class="single-input" placeholder="Mínimo" name="bajoPrecio" />
+            </div>
+            <div class="col-2">
+                <input type="number" class="single-input" placeholder="Máximo" name="altoPrecio" />
+            </div>
+            <div class="col-2">
+                <input type="submit" value="Consultar Precio" class="btn_3 p-2" />
+            </div>
+            <div class="col-2 text-danger"></div>
+        </div>
+    </form>
+    <br />
+    <div>
+        <table class="table table-striped border" id="tablaProductos">
+
+            <thead>
+
+                <tr class="table-info">
+                    <th>
+                        @Html.DisplayNameFor(c => c.Nombre)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(c => c.Precio)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(c => c.Disponibilidad)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(c => c.Detalles)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(c => c.CategoriaProductoId)
+                    </th>
+                    <th>
+
+                    </th>
+                    <th class="text-center">
+                        Acción
+                    </th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                @foreach (var k in Model)
+                {
+                    <tr>
+                        <td>@k.Nombre</td>
+                        <td>@k.Precio</td>
+                        <td>@k.Disponibilidad</td>
+                        <td>@k.Detalles</td>
+                        <td>@k.CategoriaProductos.nombreCategoria</td>
+                        <td>
+                            <partial name="_ButtonProductosPartial" model="@k.ID" />
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+
+
+        </table>
+    </div>
+</div>
+
+@section scripts{
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+    <script type="text/javascript">
+
+        //DataTable
+        $(document).ready(function () {
+            $('#tablaProductos').DataTable({
+                "language": idioma_espanol,
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'copy',
+                        text: 'COPIAR'
+                    },
+                    {
+                        extend: 'pdf',
+                        text: 'PDF'
+                    },
+                    {
+                        extend: 'excel',
+                        text: 'EXCEL'
+                    },
+                    {
+                        extend: 'csv',
+                        text: 'CSV'
+                    },
+                    {
+                        extend: 'print',
+                        text: 'IMPRIMIR'
+                    }
+                ]
+            });
+        });
+
+        var idioma_espanol = {
+            "sProcessing": "Procesando...",
+            "sLengthMenu": "Mostrar _MENU_ registros",
+            "sZeroRecords": "No se encontraron resultados",
+            "sEmptyTable": "Ningún dato disponible en esta tabla",
+            "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sSearch": "Buscar:",
+            "sUrl": "",
+            "sInfoThousands": ",",
+            "sLoadingRecords": "Cargando...",
+            "oPaginate": {
+                "sFirst": "Primero",
+                "sLast": "Último",
+                "sNext": "Siguiente",
+                "sPrevious": "Anterior"
+            },
+            "oAria": {
+                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            },
+            "buttons": {
+                "copy": "Copiar",
+                "colvis": "Visibilidad"
+            }
+        }
+
+
+
+
+
+        $(function () {
+            //Guardar
+            var guardar = '@TempData["guardar"]'
+            if (guardar != '') {
+                alertify.success(guardar);
+            }
+
+            //Editar
+
+            var editar = '@TempData["editar"]'
+            if (editar != '') {
+                alertify.success(editar);
+            }
+
+            //Eliminar
+            var eliminar = '@TempData["eliminar"]'
+            if (eliminar != '') {
+                alertify.error(eliminar);
+            }
+
+
+        })
+    </script>
+
+}

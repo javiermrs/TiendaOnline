@@ -1,0 +1,106 @@
+﻿@model IEnumerable<TiendaOnline.Models.ApplicationUser>
+@{
+    ViewData["Title"] = "Cumpleaños Julio";
+}
+
+<br />
+<br />
+<div class="container">
+
+    <div class="row">
+        <div class="col-6">
+            <h2 class="text-info">Cumpleaños del mes de Julio</h2>
+
+        </div>
+    </div>
+    <br />
+
+    <div>
+        <table class="table table-striped border text-center" id="cumple">
+            <thead>
+                <tr class="table-info">
+                    <th>Correo</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var k in Model)
+                {
+                    <tr>
+                        <td>@k.UserName</td>
+                        <td>@k.fechaNacimiento</td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    </div>
+    </div>
+    @section scripts{
+        <script type="text/javascript">
+
+            //DataTable
+            $(document).ready(function () {
+                $('#cumple').DataTable({
+                    "language": idioma_espanol,
+                    dom: 'Bfrtip',
+                    buttons: [
+                        {
+                            extend: 'copy',
+                            text: 'COPIAR'
+                        },
+                        {
+                            extend: 'pdf',
+                            text: 'PDF'
+                        },
+                        {
+                            extend: 'excel',
+                            text: 'EXCEL'
+                        },
+                        {
+                            extend: 'csv',
+                            text: 'CSV'
+                        },
+                        {
+                            extend: 'print',
+                            text: 'IMPRIMIR'
+                        }
+                    ]
+                });
+            });
+
+            var idioma_espanol = {
+                "sProcessing": "Procesando...",
+                "sLengthMenu": "Mostrar _MENU_ registros",
+                "sZeroRecords": "No se encontraron resultados",
+                "sEmptyTable": "Ningún dato disponible en esta tabla",
+                "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sSearch": "Buscar:",
+                "sUrl": "",
+                "sInfoThousands": ",",
+                "sLoadingRecords": "Cargando...",
+                "oPaginate": {
+                    "sFirst": "Primero",
+                    "sLast": "Último",
+                    "sNext": "Siguiente",
+                    "sPrevious": "Anterior"
+                },
+                "oAria": {
+                    "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                },
+                "buttons": {
+                    "copy": "Copiar",
+                    "colvis": "Visibilidad"
+                }
+            }
+
+        </script>
+
+    }
+
+
+

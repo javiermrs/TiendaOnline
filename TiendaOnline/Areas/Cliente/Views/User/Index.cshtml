@@ -1,0 +1,104 @@
+﻿@using TiendaOnline.Models;
+@model IEnumerable<ApplicationUser>
+@{
+    ViewData["Title"] = "Index";
+}
+<br />
+<br />
+
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <h2 class="text-info">Lista de Usuarios</h2>
+        </div>
+        <div class="col-6 text-right">
+            <a asp-action="Create" class="button button-contactForm boxed-btn p-3">Nuevo Usuario</a>
+        </div>
+    </div>
+
+    <br />
+
+    <div>
+        <table class="table table-striped border text-center">
+
+            <tr class="table-info ">
+                <th>
+                    Fecha de Nacimiento
+                </th>
+                <th>
+                    Usuario
+                </th>
+                <th>Estado</th>
+                <th>
+
+                </th>
+                <th class="text-center">
+                    Acción
+                </th>
+            </tr>
+
+            @foreach (var k in Model)
+            {
+                <tr>
+                    <td>
+                        @k.fechaNacimiento
+                    </td>
+                    <td>
+                        @k.UserName
+                    </td>
+
+                    @if (k.LockoutEnd > DateTime.Now && k.LockoutEnd != null)
+                    {
+                        <td>Usuario Inactivo</td>
+                        <td></td>
+                        <td>
+                            <div class="btn-group">
+                                <a asp-action="Active" class="button button-contactForm bg-success" asp-route-id="@k.Id">Editar</a>
+                                <a asp-action="Delete" class="button button-contactForm" asp-route-id="@k.Id">Eliminar</a>
+                            </div>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>Usuario Activo</td>
+                        <td>
+                            <partial name="_PartialView" model="@k.Id" />
+                        </td>
+                    }
+
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+
+@section scripts{
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            //Guardar
+            var guardar = '@TempData["guardar"]'
+            if (guardar != '') {
+                alertify.success(guardar);
+            }
+
+            //Editar
+
+            var editar = '@TempData["editar"]'
+            if (editar != '') {
+                alertify.success(editar);
+            }
+
+            //Eliminar
+            var eliminar = '@TempData["eliminar"]'
+            if (eliminar != '') {
+                alertify.error(eliminar);
+            }
+
+
+        })
+    </script>
+
+}

@@ -1,0 +1,140 @@
+﻿@model TiendaOnline.Models.Orden
+@{
+    ViewData["Title"] = "Editar Estado";
+}
+
+<br />
+
+<div class="container">
+
+    <h2 class=""> Editar Estado de Orden</h2>
+    <br />
+
+    <form asp-action="Edit" method="post">
+        <div class="p-4 ">
+            <input type="hidden" asp-for="ID" />
+            <div asp-validation-summary="ModelOnly" class="text-danger">
+
+            </div>
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="numeroOrden"></label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="numeroOrden" readonly="readonly" class="form-control" />
+                </div>
+                <span asp-validation-for="numeroOrden" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="Nombre"></label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="Nombre" readonly="readonly" class="form-control" />
+                </div>
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="Correo"></label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="Correo" readonly="readonly" class="form-control" />
+                </div>
+                <span asp-validation-for="Correo" class="text-danger"></span>
+            </div>
+
+            @*<div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Estado"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="Estado" class="form-control" />
+            </div>
+            <span asp-validation-for="Estado" class="text-danger"></span>
+        </div>*@
+
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="Estado"></label>
+                </div>
+                <div class="col-5">
+                    <select asp-for="Estado" class="form-control">
+                        <option>En Proceso</option>
+                        <option>Enviado</option>
+                        <option>Completado</option>
+                    </select>
+                </div>
+                <span asp-validation-for="Estado" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="Direccion"></label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="Direccion" readonly="readonly" class="form-control" />
+                    <span asp-validation-for="Direccion" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="numeroTel"></label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="numeroTel" readonly="readonly" class="form-control" />
+                    <span asp-validation-for="numeroTel" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="Correo"></label>
+                </div>
+                <div class="col-5">
+                    @*<select asp-for="CategoriaProductoId" asp-items="ViewBag.categoriaProductoId" class="form-control"></select>*@
+                    <input asp-for="Correo" readonly="readonly" class="form-control" />
+                    <span asp-validation-for="Correo" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="Fecha"></label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="Fecha" readonly="readonly" class="form-control" />
+                    <span asp-validation-for="Fecha" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="Lat"></label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="Lat" readonly="readonly" class="form-control" />
+                    <span asp-validation-for="Lat" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="Long"></label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="Long" readonly="readonly" class="form-control" />
+                    <span asp-validation-for="Long" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <a class="btn_3  " asp-action="Index">Cancelar</a>
+                <input class="button p-4" type="submit" value="Actualizar"/>
+            </div>
+
+        </div>
+    </form>
+
+</div>
+
+@section Scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

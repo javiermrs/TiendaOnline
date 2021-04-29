@@ -1,0 +1,60 @@
+﻿@using TiendaOnline.Models;
+@model IEnumerable<Orden>
+@{
+    ViewData["Title"] = "Mapa";
+}
+
+
+<br />
+<br />
+
+<div class="container">
+
+    <h1 class="display-4 text-center">Ordenes</h1>
+    <form asp-action="Mapa" method="post">
+        <select id="estado" name="estado">
+            <option value="Todas">Todas</option>
+            <option value="En proceso">En proceso</option>
+            <option value="Enviado">Enviado</option>
+            <option value="Completado">Completado</option>
+        </select>
+
+        <input type="submit" class="btn_3 p-2 ml-2" value="Consultar" />
+
+    </form>
+
+
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <p class="h2 text-center">Ordenes con el estado: <strong class="text-danger"> @ViewData["Estado"]</strong></p>
+
+    <br />
+
+    <div id="map" style="height: 480px; "></div>
+
+    <!--Scripts
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
+    <script src="~/js/script.js"></script>
+
+</div>
+@foreach (var item in Model)
+{
+
+
+    <script>
+            if ("@item.Estado" === "@ViewData["Estado"]" && "@ViewData["Estado"]" != 'Todas') {
+                L.marker([@item.Lat, @item.Long], { draggable: true }).addTo(map)
+                    .bindPopup("<b>No. Orden:</b> @item.numeroOrden <br> <b>Cliente:</b> @item.Correo <br><b>Estado:</b> @item.Estado ")
+                    .openPopup();
+            }else if ("@ViewData["Estado"]" === 'Todas') {
+            L.marker([@item.Lat, @item.Long], { draggable: true }).addTo(map)
+               .bindPopup("<b>No. Orden:</b> @item.numeroOrden <br> <b>Cliente:</b> @item.Correo <br><b>Estado:</b> @item.Estado " )
+                    .openPopup();
+                }
+    </script>
+
+}

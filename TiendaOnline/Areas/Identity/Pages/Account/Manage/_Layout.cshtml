@@ -1,0 +1,24 @@
+﻿@{
+    Layout = "/Areas/Identity/Pages/_Layout.cshtml";
+}
+
+    <br />
+<h1 class="display-4 text-center">Gestiona tu cuenta</h1>
+
+<br />
+<div>
+    <h4>Cambiar configuraciones de mi cuenta</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-3">
+            <partial name="_ManageNav" />
+        </div>
+        <div class="col-md-9">
+            @RenderBody()
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}

@@ -1,0 +1,81 @@
+﻿
+@{
+    ViewData["Title"] = "Asignacion de Roles a Usuario";
+}
+<br />
+<br />
+
+
+<div class="row">
+    <div class="col-6">
+        <h2 class="text-info">Asignacion de Roles a Usuario</h2>
+    </div>
+    @*<div class="col-6 text-right">
+        <a asp-action="Create" class="btn btn-info">Nuevo Rol</a>
+    </div>*@
+</div>
+
+<br />
+
+<div>
+    <table class="table table-striped border text-center">
+
+        <tr class="table-info ">
+            <th>
+                Nombre de Usuario 
+            </th>
+            <th>
+                Nombre de Rol
+            </th>
+        </tr>
+
+        @foreach (var k in ViewBag.UserRoles)
+        {
+            <tr>
+                <td>
+                    @k.UserName
+                </td>
+                <td>@k.RoleName</td>
+
+                @*<td>
+                    <div class="btn-group">
+                        <a asp-action="Edit" class="btn btn-warning" asp-route-id="@k.Id">Editar</a>
+                        <a asp-action="Details" class="btn btn-info" asp-route-id="@k.Id">Detalles</a>
+                        <a asp-action="Delete" class="btn btn-danger" asp-route-id="@k.Id">Eliminar</a>
+                    </div>
+                </td>*@
+            </tr>
+        }
+
+    </table>
+</div>
+
+@section scripts{
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            //Guardar
+            var guardar = '@TempData["guardar"]'
+            if (guardar != '') {
+                alertify.success(guardar);
+            }
+
+            //Editar
+
+            var editar = '@TempData["editar"]'
+            if (editar != '') {
+                alertify.success(editar);
+            }
+
+            //Eliminar
+            var eliminar = '@TempData["eliminar"]'
+            if (eliminar != '') {
+                alertify.error(eliminar);
+            }
+
+
+        })
+    </script>
+
+}

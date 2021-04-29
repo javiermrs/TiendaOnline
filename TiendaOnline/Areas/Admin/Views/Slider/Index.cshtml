@@ -1,0 +1,59 @@
+﻿@using TiendaOnline.Models;
+@model IEnumerable<Slider>
+
+@{
+    ViewData["Title"] = "Lista de imagenes";
+}
+
+
+<br />
+
+<div class="container">
+    <h2>Lista de imagenes</h2>
+    <br />
+    <div>
+        <a asp-action="Create" class="button button-contactForm boxed-btn p-3s">Agregar Imagen</a>
+    </div>
+    <br />
+    <table class="table table-bordered text-center">
+        <thead align="center">
+            <tr>
+                <h4 class="card-header bg-primary text-uppercase text-white mt-1 mb-1 text-center rounded">
+                    Lista de imagenes agregadas al Slider.
+                </h4>
+            </tr>
+            <tr>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody align="center">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <img src="~/@item.image"
+                             class="img-fluid"
+                             height="100" width="80"
+                             asp-append-version="true" />
+
+                        @*@item.image*@
+                        @*<img src="@Url.Content(item.image)"
+
+        style="height:80px; width:60px;"
+        asp-append-version="true" />*@
+                    </td>
+                    <td><br />@item.Nombre</td>
+                    <td><br />@item.Descripcion</td>
+                    <td>
+                        <br /><a asp-controller="Slider" asp-action="Delete" class="btn_3 p-2" asp-route-id="@item.ID"> Eliminar </a>
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+</div>
+
